@@ -105,3 +105,16 @@ BEGIN
     FETCH left_jobs INTO @name;
 END;
 CLOSE left_jobs; DEALLOCATE left_jobs;
+
+-- 6. Remote server entries that sp_addsubscription leaves for a subscriber (not linked, no flag).
+DECLARE left_servers CURSOR LOCAL FAST_FORWARD FOR
+    SELECT name FROM sys.servers
+    WHERE server_id > 0 AND is_linked = 0 AND name LIKE N'RPLLAB%' AND name <> @@SERVERNAME;
+OPEN left_servers; FETCH left_servers INTO @name;
+WHILE @@FETCH_STATUS = 0
+BEGIN
+    PRINT N'$(N): dropping remote server ' + @name;
+    EXEC sys.sp_dropserver @server = @name, @droplogins = N'droplogins';
+    FETCH left_servers INTO @name;
+END;
+CLOSE left_servers; DEALLOCATE left_servers;

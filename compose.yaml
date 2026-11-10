@@ -5,7 +5,8 @@
 # No privilege, no systemd, no added capability: it runs under Docker Desktop (Windows,
 # macOS on x86-64) as under Podman. Publisher and subscriber are bounded to 2 GB, the distributor
 # to 3 GB: the lab needs about 7 GB.
-# Replication refuses an IP address or "localhost" as a server name: each container gets a
+# Replication works by server name: the distributor refuses an IP address or "localhost" for
+# itself, and Microsoft does not support an IP address elsewhere. Each container gets a
 # hostname, which becomes its @@SERVERNAME, and the instances reach each other by it.
 # The volume "share" is mounted on the three instances at /var/opt/mssql/share: it holds the
 # backup and, in repldata/, the snapshot folder, in place of the network share a Windows

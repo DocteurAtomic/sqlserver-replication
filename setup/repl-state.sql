@@ -7,7 +7,8 @@ INSERT @r SELECT N'published database ' + name FROM sys.databases
     WHERE is_published = 1 OR is_merge_published = 1;
 INSERT @r SELECT N'subscribed database ' + name FROM sys.databases WHERE is_subscribed = 1;
 INSERT @r SELECT N'linked or remote server ' + name FROM sys.servers
-    WHERE server_id > 0 AND (is_distributor = 1 OR name = N'repl_distributor' OR is_publisher = 1 OR is_subscriber = 1);
+    WHERE server_id > 0 AND (is_distributor = 1 OR name = N'repl_distributor' OR is_publisher = 1 OR is_subscriber = 1
+           OR (is_linked = 0 AND name LIKE N'RPLLAB%' AND name <> @@SERVERNAME));
 INSERT @r SELECT N'replication job ' + j.name FROM msdb.dbo.sysjobs j
     JOIN msdb.dbo.syscategories c ON c.category_id = j.category_id
     WHERE c.name LIKE N'REPL-%';
