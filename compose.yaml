@@ -1,0 +1,59 @@
+# Lab of the course: three SQL Server 2025 Developer instances with fixed replication roles,
+# rpllab1 publisher, rpllab2 distributor, rpllab3 subscriber.
+# Start it and restore PachadataTraining on rpllab1 with:
+#   ./setup/install.sh
+# No privilege, no systemd, no added capability: it runs under Docker Desktop (Windows,
+# macOS on x86-64) as under Podman. Publisher and subscriber are bounded to 2 GB, the distributor
+# to 3 GB: the lab needs about 7 GB.
+# Replication refuses an IP address or "localhost" as a server name: each container gets a
+# hostname, which becomes its @@SERVERNAME, and the instances reach each other by it.
+# The volume "share" is mounted on the three instances at /var/opt/mssql/share: it holds the
+# backup and, in repldata/, the snapshot folder, in place of the network share a Windows
+# setup would use.
+x-sql: &sql
+  image: mcr.microsoft.com/mssql/server:2025-CU7-ubuntu-24.04
+  environment:
+    ACCEPT_EULA: "Y"
+    MSSQL_PID: Developer
+    MSSQL_AGENT_ENABLED: "true"
+    MSSQL_SA_PASSWORD: ${MSSQL_SA_PASSWORD:-Repl-2026!lab}
+    SQLCMDPASSWORD: ${MSSQL_SA_PASSWORD:-Repl-2026!lab}
+  mem_limit: 2g
+  cpus: 2
+  healthcheck:
+    test: ["CMD", "/opt/mssql-tools18/bin/sqlcmd", "-S", "127.0.0.1", "-U", "sa", "-C", "-Q", "SELECT 1"]
+    interval: 5s
+    timeout: 5s
+    retries: 30
+    start_period: 10s
+  networks: [lab]
+services:
+  rpllab1:
+    <<: *sql
+    container_name: rpllab1
+    hostname: rpllab1
+    ports: ["127.0.0.1:${SQLPORT1:-14731}:1433"]
+    volumes: [data1:/var/opt/mssql, share:/var/opt/mssql/share]
+  rpllab2:
+    <<: *sql
+    # The distributor runs the snapshot, log reader and push distribution agents inside its
+    # SQL Server Agent: with 2 GB it ran out of memory (Msg 701, 17803) under about fifteen
+    # continuous agents on 10 November 2026. It gets 3 GB.
+    mem_limit: 3g
+    container_name: rpllab2
+    hostname: rpllab2
+    ports: ["127.0.0.1:${SQLPORT2:-14732}:1433"]
+    volumes: [data2:/var/opt/mssql, share:/var/opt/mssql/share]
+  rpllab3:
+    <<: *sql
+    container_name: rpllab3
+    hostname: rpllab3
+    ports: ["127.0.0.1:${SQLPORT3:-14733}:1433"]
+    volumes: [data3:/var/opt/mssql, share:/var/opt/mssql/share]
+networks:
+  lab: {name: rpllab-net}
+volumes:
+  data1: {name: rpllab-data1}
+  data2: {name: rpllab-data2}
+  data3: {name: rpllab-data3}
+  share: {name: rpllab-share}

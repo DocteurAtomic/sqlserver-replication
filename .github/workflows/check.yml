@@ -1,0 +1,29 @@
+name: check
+on:
+  push:
+  pull_request:
+  workflow_dispatch:
+jobs:
+  lab:
+    runs-on: ubuntu-latest
+    timeout-minutes: 90
+    steps:
+      - uses: actions/checkout@v7
+      - name: Start the three instances and restore the database
+        run: ./setup/install.sh
+      - name: Run the demos and the exercises, module by module
+        # Each module ends with its 99-cleanup script: the lab is back in its installed state.
+        run: ./setup/run-scripts.sh
+      - name: Stop the lab cleanly, start it again and check it
+        run: |
+          ./setup/stop.sh
+          docker compose up -d --wait
+          for i in $(seq 1 30); do ./setup/test-lab.sh >/dev/null 2>&1 && break; sleep 2; done
+          ./setup/test-lab.sh
+      - name: Show the state of the lab after a failure
+        if: failure()
+        run: |
+          free -m
+          . setup/lib.sh
+          sql rpllab2 -s '|' -Q "SET NOCOUNT ON; IF DB_ID('distribution') IS NOT NULL BEGIN SELECT TOP (20) time, error_code, LEFT(error_text, 300) FROM distribution.dbo.MSrepl_errors ORDER BY time DESC; SELECT TOP (20) time, runstatus, LEFT(comments, 300) FROM distribution.dbo.MSdistribution_history ORDER BY time DESC; END" || true
+          for n in $nodes; do docker exec $n tail -n 40 /var/opt/mssql/log/errorlog || true; done
