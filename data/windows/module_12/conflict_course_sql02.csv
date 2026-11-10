@@ -1,0 +1,4 @@
+node,originator_id,origin,conflict_type,is_winner,CourseId,Price,reason_text
+----,-------------,------,-------------,---------,--------,-----,-----------
+SQL02,2,1,1,0,4,1700.00,An update-update conflict between peer 1 (incoming) and peer 2 (on disk) was detected and resolved. The incoming update was skipped by peer 2.
+SQL02,2,2,1,1,4,1750.00,An update-update conflict between peer 1 (incoming) and peer 2 (on disk) was detected and resolved. The incoming update was skipped by peer 2.

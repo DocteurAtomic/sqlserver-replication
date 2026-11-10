@@ -1,0 +1,10 @@
+Changed database context to 'm12_catalog'.
+error_number error_message
+------------ -------------
+20646 Peer-to-peer publications do not support filtering. Change the value for parameter '@publication'.
+error_number error_message
+------------ -------------
+21679 Peer-to-peer publications only support a '@sync_type' parameter value of 'replication support only', 'initialize with backup' or 'initialize from lsn'.
+name is_not_for_replication is_not_trusted
+---- ---------------------- --------------
+FK_Session_Course 1 1

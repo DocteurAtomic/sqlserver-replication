@@ -1,0 +1,6 @@
+node,originator_id,origin,conflict_type,is_winner,SessionId,Seats,last_write_utc,reason_text
+----,-------------,------,-------------,---------,---------,-----,--------------,-----------
+SQL01,1,2,1,0,110,14,2026-11-10 22:42:45.5610238,An update-update conflict between peer 2 (incoming) with commit dateime value of '2026-11-10 22:42:45.5610238' and peer 1 (on disk) with commit datetime value of '2026-11-10 22:42:49.0929141' was detected and resolved. The incoming update was skipped by peer 1.
+SQL01,1,1,1,1,110,16,2026-11-10 22:42:49.0929141,An update-update conflict between peer 2 (incoming) with commit dateime value of '2026-11-10 22:42:45.5610238' and peer 1 (on disk) with commit datetime value of '2026-11-10 22:42:49.0929141' was detected and resolved. The incoming update was skipped by peer 1.
+SQL01,1,2,2,1,121,NULL,NULL,A delete-update conflict between peer 2 (incoming) and peer 1 (on disk) was detected and resolved. The incoming delete was applied to peer 1.
+SQL01,1,1,2,0,121,8,NULL,A delete-update conflict between peer 2 (incoming) and peer 1 (on disk) was detected and resolved. The incoming delete was applied to peer 1.

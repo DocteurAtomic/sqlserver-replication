@@ -1,0 +1,7 @@
+Changed database context to 'm12_catalog'.
+request_id waited_seconds
+---------- --------------
+1 30
+request_id peer peer_db received_date
+---------- ---- ------- -------------
+1 SQL02 m12_catalog NULL

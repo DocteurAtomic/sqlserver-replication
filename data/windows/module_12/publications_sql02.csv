@@ -1,0 +1,4 @@
+node,publication,originator_id,conflict_policy,continue_onconflict,article
+----,-----------,-------------,---------------,-------------------,-------
+SQL02,m12_pubCourse,2,originatorid,0,Course
+SQL02,m12_pubSession,2,lastwriter,1,Session

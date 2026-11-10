@@ -1,0 +1,14 @@
+Changed database context to 'm12_catalog'.
+Job 'SQL01-m12_catalog-m12_pubCourse-SQL02-5' started successfully.
+node CourseId Price
+---- -------- -----
+SQL01 4 1700.00
+runstatus comments
+--------- --------
+6 A conflict of type 'Update-Update' was detected at peer 2 between peer 1 (incoming), transaction id 0x000000000000057c  and peer 2 (on disk), transaction id 0x0
+3 Error executing a batch of commands. Retrying individual commands.
+1 Initializing
+error_code error_text
+---------- ----------
+22815 A conflict of type 'Update-Update' was detected at peer 2 between peer 1 (incoming), transaction id 0x000000000000057c  and peer 2 (on disk), transaction id 0x0000000000000600 for Table '[Catalog].[Course]' with Primary Key(s): [CourseId] = 4,  Current Ver
+ if @@trancount > 0 rollback tran

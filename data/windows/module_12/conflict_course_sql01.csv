@@ -1,0 +1,4 @@
+node,originator_id,origin,conflict_type,is_winner,CourseId,Price,reason_text
+----,-------------,------,-------------,---------,--------,-----,-----------
+SQL01,1,2,1,1,4,1750.00,An update-update conflict between peer 2 (incoming) and peer 1 (on disk) was detected and resolved. The incoming update was applied to peer 1.
+SQL01,1,1,1,0,4,1700.00,An update-update conflict between peer 2 (incoming) and peer 1 (on disk) was detected and resolved. The incoming update was applied to peer 1.

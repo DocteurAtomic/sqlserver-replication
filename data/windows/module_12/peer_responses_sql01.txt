@@ -1,0 +1,19 @@
+Changed database context to 'm12_catalog'.
+request_id peer peer_db received_date
+---------- ---- ------- -------------
+1 SQL02 m12_catalog 2026-11-10 14:44:07.437
+id publication sent_date description
+-- ----------- --------- -----------
+1 m12_pubCourse 2026-11-10 14:43:28.503 Before changing the schema of Course
+originator originator_db originator_publication originator_lsn
+---------- ------------- ---------------------- --------------
+SQL01 m12_catalog m12_pubCourse 0x00
+SQL02 m12_catalog m12_pubCourse 0x0000002D00000549000A
+SQL01 m12_catalog m12_pubSession 0x00
+SQL02 m12_catalog m12_pubSession 0x0000002D000004180004
+id publisher_database_id srvname dbname publication_id dbversion
+-- --------------------- ------- ------ -------------- ---------
+1 1 SQL01 m12_catalog 1 953484950
+2 1 SQL01 m12_catalog 2 953484950
+3 1 SQL02 m12_catalog 1 192294584
+4 1 SQL02 m12_catalog 2 192294584
