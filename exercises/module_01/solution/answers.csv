@@ -1,0 +1,7 @@
+need;technique;reason
+1-registration-catalog;transactional;Three tables out of 64, read only on the site, a few seconds behind production: transactional replication of these articles only.
+2-finance-references;snapshot;Small reference tables that change rarely and are needed once a night: a nightly snapshot reloads them whole.
+3-reporting-whole-database;availability-group;The whole database, readable on a secondary replica, with failover when production stops: replication copies articles, not a database.
+4-analytics-in-fabric;fabric-mirroring;Analytics in Fabric without writing a load: mirroring lands the tables in OneLake. On SQL Server 2025 it refuses a database that is also published.
+5-two-sites-writing;peer-to-peer;Both sites write in the same catalog; each site owns its own rows so that the same row is not changed in two places at once.
+6-crm-changed-rows;change-tracking;The CRM job only needs to know which Contact rows changed since its last run, then reads them itself: change tracking says which keys changed.

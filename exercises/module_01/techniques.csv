@@ -1,0 +1,12 @@
+code;technique
+snapshot;Snapshot replication
+transactional;Transactional replication
+merge;Merge replication
+peer-to-peer;Peer-to-peer transactional replication
+bidirectional;Bidirectional transactional replication
+availability-group;Always On availability group
+log-shipping;Log shipping
+cdc;Change data capture
+change-tracking;Change tracking
+fabric-mirroring;Mirroring in Microsoft Fabric
+backups;Backups and restores only
