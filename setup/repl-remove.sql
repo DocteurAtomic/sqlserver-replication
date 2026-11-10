@@ -73,7 +73,30 @@ OPEN dbs; FETCH dbs INTO @name;
 WHILE @@FETCH_STATUS = 0
 BEGIN
     PRINT N'$(N): removing replication from database ' + @name;
-    EXEC sys.sp_removedbreplication @dbname = @name, @type = N'both';
+    -- A Log Reader Agent whose job was just dropped can stay connected for a few seconds, and
+    -- sp_removedbreplication then fails in 18752: kill its sessions and retry for 30 seconds.
+    DECLARE @try int, @done bit, @kill nvarchar(30);
+    SELECT @try = 0, @done = 0;
+    WHILE @done = 0
+    BEGIN
+        WHILE 1 = 1
+        BEGIN
+            SET @kill = NULL;
+            SELECT TOP (1) @kill = N'KILL ' + CAST(session_id AS nvarchar(10)) FROM sys.dm_exec_sessions
+            WHERE program_name LIKE N'Repl-%' AND database_id = DB_ID(@name) AND session_id <> @@SPID;
+            IF @kill IS NULL BREAK;
+            EXEC (@kill);
+        END;
+        BEGIN TRY
+            EXEC sys.sp_removedbreplication @dbname = @name, @type = N'both';
+            SET @done = 1;
+        END TRY
+        BEGIN CATCH
+            SET @try += 1;
+            IF ERROR_NUMBER() <> 18752 OR @try >= 15 THROW;
+            WAITFOR DELAY '00:00:02';
+        END CATCH;
+    END;
     FETCH dbs INTO @name;
 END;
 CLOSE dbs; DEALLOCATE dbs;
