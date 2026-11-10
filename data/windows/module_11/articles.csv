@@ -1,0 +1,5 @@
+publication,article,column_tracking,upload_options,identity_support,subset_filterclause
+-----------,-------,---------------,--------------,----------------,-------------------
+m11_pubByCentre,Attendance,0,0,1,
+m11_pubByCentre,Centre,0,2,0,
+m11_pubByCentre,Session,1,0,0,CentreCode = HOST_NAME()

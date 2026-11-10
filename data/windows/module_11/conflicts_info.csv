@@ -1,0 +1,7 @@
+article,conflict_type,reason_code,origin_datasource,reason_text,create_time
+-------,-------------,-----------,-----------------,-----------,-----------
+Session,1,1,SQL02.m11_lille,The same row was updated at both 'SQL01.m11_pacha' and 'SQL02.m11_lille'. The resolver chose the update from 'SQL01.m11_pacha' as the winner.,2026-11-10 13:50:14.640
+Session,1,1,SQL02.m11_lille,The same row was updated at both 'SQL01.m11_pacha' and 'SQL02.m11_lille'. The resolver chose the update from 'SQL01.m11_pacha' as the winner.,2026-11-10 13:50:24.740
+Session,5,2627,SQL02.m11_lille,A row insert at 'SQL02.m11_lille' could not be propagated to 'SQL01.m11_pacha'. This failure can be caused by a constraint violation.  Violation of PRIMARY KEY constraint 'PK_Session'. Cannot insert duplicate key in object 'Training.Session'. The duplicate key value is (2001).,2026-11-10 13:50:32.583
+Session,6,2627,SQL01.m11_pacha,A row insert at 'SQL01.m11_pacha' could not be propagated to 'SQL02.m11_lille'. This failure can be caused by a constraint violation.  Violation of PRIMARY KEY constraint 'PK_Session'. Cannot insert duplicate key in object 'Training.Session'. The duplicate key value is (2001).,2026-11-10 13:50:32.890
+Session,2,2,SQL02.m11_lille,The same column(s) of the same row was updated at both 'SQL01.m11_pacha' and 'SQL02.m11_lille'. The resolver chose the update from 'SQL01.m11_pacha' as the winner.,2026-11-10 13:51:22.573

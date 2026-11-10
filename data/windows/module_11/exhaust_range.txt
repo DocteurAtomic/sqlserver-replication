@@ -1,0 +1,13 @@
+Changed database context to 'm11_lille'.
+name definition
+---- ----------
+repl_identity_range_5F682F88_F6F7_4833_848F_A584ABCAAC12 ([AttendanceId]>(641) AND [AttendanceId]<=(741) OR [AttendanceId]>(741) AND [AttendanceId]<=(841))
+ident_current_before
+--------------------
+642
+rows_inserted error_number error_message
+------------- ------------ -------------
+200 548 The insert failed. It conflicted with an identity range check constraint in database 'm11_lille', replicated table 'Training.Attendance', column 'AttendanceId'. If the identity column is automatically managed by replication, update the range as follows: for the Publisher, execute sp_adjustpublisheridentityrange; for the Subscriber, run the Distribution Agent or the Merge Agent.
+first_id last_id
+-------- -------
+642 841

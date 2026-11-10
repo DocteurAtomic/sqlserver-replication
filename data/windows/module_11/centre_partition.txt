@@ -1,0 +1,10 @@
+centre_db CentreCode sessions attendance
+--------- ---------- -------- ----------
+m11_lille LIL 10 81
+m11_geneve GEN 11 80
+host_name_of_this_session
+-------------------------
+SQL02
+error_number error_message
+------------ -------------
+20063 Table '[Training].[Centre]' into which you are trying to insert, update, or delete data has been marked as read-only. Only the merge process can perform these operations.

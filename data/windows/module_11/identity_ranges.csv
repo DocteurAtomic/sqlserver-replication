@@ -1,0 +1,5 @@
+node,range_begin,range_end,next_range_begin,next_range_end
+----,-----------,---------,----------------,--------------
+m11_pacha,441,541,541,641
+m11_geneve,841,941,941,1041
+m11_lille,1041,1141,1141,1241

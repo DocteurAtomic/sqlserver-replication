@@ -1,0 +1,4 @@
+subscriber_db,partition_id,host_name_value
+-------------,------------,---------------
+m11_lille,1,LIL
+m11_geneve,2,GEN

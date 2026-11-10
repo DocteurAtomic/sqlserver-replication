@@ -1,0 +1,7 @@
+SessionId,CentreCode,CourseTitle,Room,Seats,origin_datasource
+---------,----------,-----------,----,-----,-----------------
+1002,GEN,Query tuning,Room 2,14,SQL02.m11_lille
+1004,LIL,Availability groups,Lille hall,12,SQL02.m11_lille
+1005,GEN,PowerShell for DBAs,Room 1,16,SQL02.m11_lille
+2001,LIL,Merge replication,Room 2,10,SQL02.m11_lille
+2001,GEN,Peer-to-peer replication,Room 1,12,SQL01.m11_pacha

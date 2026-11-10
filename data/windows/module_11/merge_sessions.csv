@@ -1,0 +1,8 @@
+sync_number,publication,subscriber_db,result,upload_inserts,upload_updates,upload_deletes,upload_conflicts,download_inserts,download_updates,download_deletes,download_conflicts
+-----------,-----------,-------------,------,--------------,--------------,--------------,----------------,----------------,----------------,----------------,------------------
+1,m11_pubByCentre,m11_geneve,succeeded,0,0,0,0,94,0,0,0
+2,m11_pubByCentre,m11_geneve,succeeded,0,0,0,0,9,0,0,0
+1,m11_pubByCentre,m11_lille,succeeded,0,0,0,0,94,0,0,0
+2,m11_pubByCentre,m11_lille,succeeded,0,0,0,0,0,0,9,0
+3,m11_pubByCentre,m11_lille,succeeded,0,1,0,0,0,1,0,0
+4,m11_pubByCentre,m11_lille,succeeded,200,0,0,0,0,0,0,0
