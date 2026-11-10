@@ -15,7 +15,7 @@ Trois instances SQL Server 2025 Developer en conteneurs, aux rôles fixés :
 | `rpllab3` | abonné | 14733 |
 
 Il faut Docker (Docker Desktop sous Windows ou macOS sur processeur x86-64) ou Podman, environ
-6 Go de mémoire libre et 4 Go de disque. Les images de SQL Server 2025 ne sont prises en charge
+7 Go de mémoire libre et 4 Go de disque. Les images de SQL Server 2025 ne sont prises en charge
 que sur un hôte Linux x86-64 : un Mac Apple Silicon ne convient pas.
 
     ./setup/install.sh                                    # Docker
@@ -33,6 +33,11 @@ réutilisez nulle part.
 
 `docker stop` tue SQL Server sans lui laisser fermer ses bases : arrêtez le labo par
 `./setup/stop.sh`.
+
+Si une connexion au distributeur échoue en Msg 17803 ou en délai de connexion, `rpllab2` manque
+de mémoire : trop d'agents continus tournent (une publication oubliée par un exercice, par
+exemple). `./setup/repl-remove.sh` retire toute la réplication du labo ; au besoin, redémarrez
+d'abord `rpllab2` (`docker restart rpllab2`).
 
 ## Les conventions
 
@@ -59,7 +64,7 @@ demos of each module, the exercises, their solutions and their checks.
 Three SQL Server 2025 Developer instances in containers, with fixed roles: `rpllab1`
 publisher (database `PachadataTraining`, port 14731), `rpllab2` distributor (14732), `rpllab3`
 subscriber (14733). You need Docker (Docker Desktop on Windows or on an x86-64 Mac) or Podman,
-about 6 GB of free memory and 4 GB of disk. SQL Server 2025 images are supported on x86-64
+about 7 GB of free memory and 4 GB of disk. SQL Server 2025 images are supported on x86-64
 Linux hosts only: an Apple Silicon Mac does not fit.
 
     ./setup/install.sh                                    # Docker
