@@ -19,7 +19,7 @@ sql rpllab2 -Q "SET NOCOUNT ON;
     IF OBJECT_ID(N'msdb.dbo.MSdistributiondbs') IS NOT NULL
         EXEC (N'IF EXISTS (SELECT * FROM msdb.dbo.MSdistributiondbs WHERE name = N''distribution'' AND max_distretention <> 72)
             EXEC sys.sp_changedistributiondb @database = N''distribution'', @property = N''max_distretention'', @value = N''72'';');" > /dev/null
-./setup/repl-remove.sh > /dev/null
+./setup/repl-remove.sh
 sql rpllab1 -d PachadataTraining -Q "SET NOCOUNT ON;
     IF OBJECT_ID(N'm08_Journal.dbo.SessionBefore') IS NOT NULL
     BEGIN

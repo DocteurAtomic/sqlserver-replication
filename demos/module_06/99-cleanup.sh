@@ -14,7 +14,7 @@
 set -euo pipefail
 cd "$(dirname "$0")/../.."
 . setup/lib.sh
-./setup/repl-remove.sh > /dev/null
+./setup/repl-remove.sh
 sql rpllab1 -d PachadataTraining -Q "SET NOCOUNT ON;
     IF OBJECT_ID(N'm06_Work.dbo.SessionBefore') IS NOT NULL
     BEGIN

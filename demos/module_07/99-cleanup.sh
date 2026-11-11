@@ -14,7 +14,7 @@ cd "$(dirname "$0")/../.."
 sql rpllab3 -Q "SET NOCOUNT ON;
     IF DATABASEPROPERTYEX(N'PachaCatalog', N'Status') = N'OFFLINE' ALTER DATABASE PachaCatalog SET ONLINE;
     IF DATABASEPROPERTYEX(N'ex_catalog', N'Status') = N'OFFLINE' ALTER DATABASE ex_catalog SET ONLINE;"
-./setup/repl-remove.sh > /dev/null
+./setup/repl-remove.sh
 sql rpllab2 -Q "SET NOCOUNT ON;
     IF EXISTS (SELECT * FROM msdb.dbo.sysjobs WHERE name = N'ex_agent_failure_watch')
     BEGIN EXEC msdb.dbo.sp_delete_job @job_name = N'ex_agent_failure_watch'; PRINT N'rpllab2: job ex_agent_failure_watch dropped'; END;

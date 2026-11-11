@@ -12,7 +12,7 @@
 set -euo pipefail
 cd "$(dirname "$0")/../.."
 . setup/lib.sh
-./setup/repl-remove.sh > /dev/null
+./setup/repl-remove.sh
 sql rpllab1 -d PachadataTraining -Q "SET NOCOUNT ON;
     DELETE Enrollment.Enrollment WHERE OrderReference LIKE 'M05-%';
     IF @@ROWCOUNT > 0
