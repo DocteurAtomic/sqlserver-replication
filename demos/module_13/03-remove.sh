@@ -32,7 +32,21 @@ echo "== 1. rpllab1: the subscriptions, the publication, then publishing on the 
 sql rpllab1 -d m13_Catalog -Q "SET NOCOUNT ON;
     EXEC sys.sp_dropsubscription @publication = N'm13_pubCatalog', @article = N'all', @subscriber = N'all';
     EXEC sys.sp_droppublication @publication = N'm13_pubCatalog';
-    EXEC sys.sp_replicationdboption @dbname = N'm13_Catalog', @optname = N'publish', @value = N'false';"
+    -- The Log Reader Agent calls sp_replcmds on every poll; when this call lands on one, it fails in
+    -- Msg 18752 (seen once in CI on 11 November 2026). Retry for 30 seconds.
+    DECLARE @try int = 0;
+    WHILE 1 = 1
+    BEGIN
+        BEGIN TRY
+            EXEC sys.sp_replicationdboption @dbname = N'm13_Catalog', @optname = N'publish', @value = N'false';
+            BREAK;
+        END TRY
+        BEGIN CATCH
+            SET @try += 1;
+            IF ERROR_NUMBER() <> 18752 OR @try >= 15 THROW;
+            WAITFOR DELAY '00:00:02';
+        END CATCH;
+    END;"
 state
 echo
 echo "== 2. rpllab3: the subscription metadata of the push subscription"
